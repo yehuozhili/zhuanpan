@@ -1,0 +1,70 @@
+$pieceHeight = 300px  //这个可以控制大小
+$degree =30deg       //控制片数 360/30=12
+$pieceWidth = $pieceHeight/2
+$linearwidth = $pieceWidth/2  //度数变更需要调整线性变化使得截取长度固定
+$lineardegree = 90+$degree
+$piece = 360/$degree
+$pointHeight = 50px
+$pointWidth = 20px
+
+body
+  font-family:'Microsoft YaHei';
+  margin: 0
+  padding: 0
+  overflow hidden //旋转的容器过长，防止因旋转产生滑块
+#viewport
+  margin 0 auto
+  width 300px
+  height: 300px
+  transform-origin: left
+  left:($pieceWidth)
+  position relative
+  for i in (1..$piece)
+    div:nth-child({i})
+      transform: rotate(($degree)*i) 
+      transform-origin: left
+      if (i%2==0)
+        background-image: linear-gradient(($lineardegree),red $linearwidth, transparent $linearwidth);
+      else
+        background-image: linear-gradient(($lineardegree),grey $linearwidth, transparent $linearwidth);
+.slice
+  width $pieceWidth
+  height $pieceHeight
+  border-radius: 0 $pieceWidth $pieceWidth 0
+  position absolute
+  left 0
+  top 0
+  span
+    display: inline-block
+    margin-top:12px
+    transform:rotate(13deg)//调整文字旋转
+    margin-left:8px
+    color #fff
+    background transparent
+.pwrap
+  margin 0 auto
+  width ($pointWidth*2)
+  height $pointHeight
+#point
+  width:0 
+  height 0
+  position absolute
+  border-width: $pointWidth
+  border-top-width: $pointHeight
+  border-style: solid 
+  transform  translateY(($pointHeight/2)) 
+  border-color: black transparent transparent transparent
+  z-index 1
+.start
+  display: flex
+  justify-content: center
+  margin-top: 10px
+  span 
+    float left  //不支持flex使用此兼容
+    font-size: 20px
+    padding: 5px
+    background brown
+    border-radius: 5px
+    color: white
+    box-shadow: black 0 0 10px 2px
+    cursor pointer
